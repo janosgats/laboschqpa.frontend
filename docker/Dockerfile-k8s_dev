@@ -7,7 +7,8 @@ RUN mkdir -p ${APP_HOME}
 
 WORKDIR ${APP_HOME}
 
-COPY ./node_modules ${APP_HOME}/node_modules
+#COPY ./node_modules ${APP_HOME}/node_modules
+VOLUME ${APP_HOME}/node_modules
 COPY ./public ${APP_HOME}/public
 COPY ./tsconfig.json ${APP_HOME}/tsconfig.json
 COPY ./src ${APP_HOME}/src
@@ -17,6 +18,5 @@ EXPOSE 30015
 EXPOSE 3000
 
 
-
-
-CMD ["npm", "start"]
+RUN npm install -g serve
+CMD ["serve", "-l", "3000", "-s", "build"]
