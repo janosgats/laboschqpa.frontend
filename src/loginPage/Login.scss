@@ -1,0 +1,38 @@
+.provider-button {
+    display: block !important;
+    margin-top: 10px;
+}
+
+.login-form-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 10px 10px 5px black;
+    min-width: fit-content;
+    min-height: fit-content;
+    //mobile
+    width: 80%;
+    height: 90%;
+
+    @media (min-width: 768px) {
+        width: 30%;
+        height: 50%
+    }
+}
+
+span {
+    margin-bottom: auto;
+    margin-top: 5px;
+    font-weight: bold !important;
+}
+
+.buttton-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: auto;
+}

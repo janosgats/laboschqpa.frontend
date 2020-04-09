@@ -4,6 +4,7 @@ import { history } from "../helpers/history";
 import { IUser } from "../reducers/login.reducer";
 import dispatch, { ThunkAction } from "redux-thunk";
 import { RootState } from "../reducers";
+import { Redirect } from "react-router";
 
 
 export type userActions = ILogin | ILoginSuccess | ILoginFailure | ILogout;
@@ -44,25 +45,24 @@ export interface IRegisterFailure{
     payload: string
 }
 
-export const login = (username:string, password:string): ThunkAction<void, RootState, unknown, ILogin> => async dispatch => {  
+export const login = (type: string): ThunkAction<void, RootState, unknown, ILogin> => async dispatch => {  
 
     dispatch({
         type: userConstants.LOGIN_REQUEST,
         payload: {}
     })
 
-    const response = await userService.login(username, password);
+    const response = await userService.login(type);
 
-    if(response as IUser !== null){
-        history.push('/');
-        dispatch({
+    if(response === 200){
+        dispatch( {
             type: userConstants.LOGIN_SUCCESS,
-            payload: response
+            payload:{}
         })
     } else {
-        dispatch({
-            type: userConstants.LOGIN_FAILURE,
-            payload: response
+        dispatch( {
+            type:userConstants.LOGIN_FAILURE,
+            payload:{}
         })
     }
 };
@@ -71,26 +71,3 @@ function logout() : userActions {
     userService.logout();
     return { type: userConstants.LOGOUT, payload:"" };
 }
-
-export function register(username:string, password:string): userActions {    
-    userService.register(username, password)
-        .then( response => {
-                if(response === "Success"){
-                    history.push('/login');
-                    return {
-                        type: userConstants.REGISTER_SUCCESS,
-                    }
-                } else {
-                    return {
-                        type: userConstants.REGISTER_FAILURE,
-                        error: "Registration failed"
-                    }
-                }                    
-            }
-        );
-        //default
-        return {
-            type: userConstants.REGISTER_FAILURE,
-            payload: ""
-        }
-};

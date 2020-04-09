@@ -40,8 +40,7 @@ export function authenticationReducer(state=initialState, action: userActions): 
       return {
         ...state,
         loggingIn: false,
-        loggedIn: true,
-        user: action.payload as IUser,
+        loggedIn: true,        
         error: null
       };
     case userConstants.LOGIN_FAILURE:
@@ -54,7 +53,6 @@ export function authenticationReducer(state=initialState, action: userActions): 
       return {
         ...state,
         loggedIn: false,
-        user: initialState.user
       };
     default:
       return {

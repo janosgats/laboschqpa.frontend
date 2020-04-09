@@ -1,78 +1,35 @@
 import { Component} from "react";
 import React from 'react';
-import Form from 'react-bootstrap/Form';
 import { Button } from "react-bootstrap";
 import { Dispatch, bindActionCreators, AnyAction } from "redux";
 import { connect } from "react-redux";
 import { login } from '../actions/user.actions'
+import { config } from "../constants/config";
+import './Login.scss'
 
-//internal state
-interface ILoginState {
-  username:string,
-  password:string
-}
+export class LoginComponent extends Component<LoginProps,{}>  {
 
-export class LoginComponent extends Component<LoginProps, ILoginState>  {
-    
-    constructor(props:LoginProps) {
-        super(props);
-        this.state = {
-            username: "",
-            password: ""
-        }
+    tryLogIn = (type:string) => {
+      this.props.login(type);
     }
-
-    tryLogIn = () => {
-      this.props.login(this.state.username,this.state.password);
-    }
-
-    handleChange = (event: React.FormEvent<HTMLInputElement>) => {
-      switch (event.currentTarget.name) {
-        case "email": {
-          this.setState({ username: event.currentTarget.value });
-          break;
-        }
-        case "password": {
-          this.setState({ password: event.currentTarget.value });
-          break;
-        }
-      }
-    };
 
     render(){
-        return (
-            <Form onSubmit={this.tryLogIn}>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control 
-                name="email"
-                type="email" 
-                placeholder="Enter email" 
-                value={this.state.username}
-                onChange={this.handleChange}/>
-              <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-              </Form.Text>
-            </Form.Group>
-          
-            <Form.Group controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control 
-                type="password" 
-                placeholder="Password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleChange}/>
-            </Form.Group>
-            <Form.Group controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Check me out" />
-            </Form.Group>
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
-          </Form>
+        return(
+          <div className="login-form-wrapper">
+            <span>
+              Bejelnetkezési lehetőségek: 
+            </span>
+            <div className="buttton-container">
+              {config.providers.map(provider => {
+                return(
+                  <Button className="provider-button" variant="secondary" onClick={ () => this.tryLogIn(provider)}>
+                    {provider}
+                  </Button>)
+              })}
+            </div>
+          </div>
         )
-    }
+      }
 }
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) =>
