@@ -1,4 +1,10 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# laboschqpa.frontend
+
+Frontend of laboschqpa website based on k8s.
+
+
+Check out the parent repo to learn about the project: https://github.com/janosgats/laboschqpa
+
 
 ## Available Scripts
 
