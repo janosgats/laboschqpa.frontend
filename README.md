@@ -1,4 +1,5 @@
-# ARCHIVED project. See the replacement: https://github.com/Krauszzsolt/laboschqpa.frontend 
+# ARCHIVED project!
+### See the new version here: https://github.com/Krauszzsolt/laboschqpa.frontend 
 
 # laboschqpa.frontend
 
