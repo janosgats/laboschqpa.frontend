@@ -1,3 +1,5 @@
+# ARCHIVED project. See the replacement: https://github.com/Krauszzsolt/laboschqpa.frontend 
+
 # laboschqpa.frontend
 
 Frontend of laboschqpa website based on k8s.
